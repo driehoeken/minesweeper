@@ -22,3 +22,55 @@ body {
 .tile {
     background-color: lightblue;
 }
+.tile.t1 {
+    content: "1";
+}
+.tile.t2 {
+    content: "2";
+}
+.tile.t3 {
+    content: "3";
+}
+.tile.t4 {
+    content: "4";
+}
+.tile.t5 {
+    content: "5";
+}
+.tile.t6 {
+    content: "6";
+}
+.tile.t7 {
+    content: "7";
+}
+.tile.t8 {
+    content: "8";
+}
+/**/
+.tile.t1::before {
+    content: "1";
+}
+.tile.t2::before {
+    content: "2";
+}
+.tile.t3::before {
+    content: "3";
+}
+.tile.t4::before {
+    content: "4";
+}
+.tile.t5::before {
+    content: "5";
+}
+.tile.t6::before {
+    content: "6";
+}
+.tile.t7::before {
+    content: "7";
+}
+.tile.t8::before {
+    content: "8";
+}
+.tile.bomb {
+    background-color: red;
+}
