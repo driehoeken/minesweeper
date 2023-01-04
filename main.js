@@ -21,6 +21,9 @@ const renderTiles = (height, width) => {
             tile.classList.add("tile");
             tile.setAttribute("data-x", j);
             tile.setAttribute("data-y", i);
+            tile.addEventListener("click", (e) => {
+                handleTileClick(e);
+            });
             board.appendChild(tile);
         }
     }
@@ -28,7 +31,6 @@ const renderTiles = (height, width) => {
 const generateBoard = (height, width, bombsNum) => {
     bombCords = generateBombsCords(height, width, bombsNum);
     renderTiles(height, width);
-    console.log(bombCords);
 
     //setting bomb and tileNumbers
     bombCords.forEach((bomb) => {
@@ -88,7 +90,6 @@ const generateBoard = (height, width, bombsNum) => {
 
     //rendering tileNumbers for debug or sth
     for (const cords in tileNumbers) {
-        console.log(cords);
         const tilePos = {
             x: cords.split(" ")[0],
             y: cords.split(" ")[1],
@@ -97,4 +98,19 @@ const generateBoard = (height, width, bombsNum) => {
         tile.classList.add(`t${tileNumbers[cords]}`);
     }
 };
+const handleTileClick = (e) => {
+    const clickedTile = e.target;
+    const tilePos = {
+        x: clickedTile.getAttribute("data-x"),
+        y: clickedTile.getAttribute("data-y"),
+    };
+    if (tileNumbers[`${tilePos.x} ${tilePos.y}`] !== undefined) {
+        console.log("number clicked");
+    } else if (bombCords.includes(`${tilePos.x} ${tilePos.y}`)) {
+        console.log("bomb clicked ;c");
+    } else {
+        console.log("empty");
+    }
+};
 generateBoard(9, 9, 10);
+console.log(tileNumbers);
