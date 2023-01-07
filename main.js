@@ -1,5 +1,7 @@
 import { getRandomInt, getTile } from "./misc.js";
 const board = document.querySelector("#board");
+//we can add new variable tileNumbersArray just to check if tile is number
+//we also have to add emptyCords for better check of empty to reveal other empty lol
 let bombCords = [];
 let tileNumbers = {};
 const generateBombsCords = (height, width, bombsNum) => {
@@ -105,11 +107,11 @@ const handleTileClick = (e) => {
         y: clickedTile.getAttribute("data-y"),
     };
     if (tileNumbers[`${tilePos.x} ${tilePos.y}`] !== undefined) {
-        console.log("number clicked");
+        console.log("number clicked"); //reveal only one
     } else if (bombCords.includes(`${tilePos.x} ${tilePos.y}`)) {
-        console.log("bomb clicked ;c");
+        console.log("bomb clicked ;c"); //game over ofc
     } else {
-        console.log("empty");
+        console.log("empty"); //reaveal other empty
     }
 };
 generateBoard(9, 9, 10);
