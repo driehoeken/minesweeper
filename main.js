@@ -5,6 +5,7 @@ const board = document.querySelector("#board");
 let bombCords = [];
 let tileNumbers = {};
 let tileNumbersArray = [];
+let emptyCords = [];
 const generateBombsCords = (height, width, bombsNum) => {
     const bombsCords = [];
     let leftBombs = bombsNum;
@@ -89,9 +90,18 @@ const generateBoard = (height, width, bombsNum) => {
                 }
             }
         }
-        tileNumbersArray = Object.getOwnPropertyNames(tileNumbers);
     });
-
+    tileNumbersArray = Object.getOwnPropertyNames(tileNumbers);
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            let cordStr = `${j} ${i}`;
+            console.log(cordStr);
+            if (!tileNumbersArray.includes(cordStr) && !bombCords.includes(cordStr)) {
+                emptyCords.push(cordStr);
+            }
+        }
+        console.log("e");
+    }
     //rendering tileNumbers for debug or sth
     for (const cords in tileNumbers) {
         const tilePos = {
@@ -118,4 +128,4 @@ const handleTileClick = (e) => {
     }
 };
 generateBoard(9, 9, 10);
-console.log(tileNumbers);
+console.log(emptyCords);
