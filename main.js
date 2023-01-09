@@ -39,44 +39,44 @@ const generateBoard = (height, width, bombsNum) => {
     //setting bomb and tileNumbers
     bombCords.forEach((bomb) => {
         const bombPos = {
-            x: bomb.split(" ")[0],
-            y: bomb.split(" ")[1],
+            x: Number(bomb.split(" ")[0]),
+            y: Number(bomb.split(" ")[1]),
         };
         const tile = getTile(bombPos.x, bombPos.y);
         tile.classList.add("bomb");
 
         const tilesToCheck = [
             {
-                x: Number(bombPos.x) - 1,
-                y: Number(bombPos.y) - 1,
+                x: bombPos.x - 1,
+                y: bombPos.y - 1,
             },
             {
-                x: Number(bombPos.x),
-                y: Number(bombPos.y) - 1,
+                x: bombPos.x,
+                y: bombPos.y - 1,
             },
             {
-                x: Number(bombPos.x) + 1,
-                y: Number(bombPos.y) - 1,
+                x: bombPos.x + 1,
+                y: bombPos.y - 1,
             },
             {
-                x: Number(bombPos.x) - 1,
-                y: Number(bombPos.y),
+                x: bombPos.x - 1,
+                y: bombPos.y,
             },
             {
-                x: Number(bombPos.x) + 1,
-                y: Number(bombPos.y),
+                x: bombPos.x + 1,
+                y: bombPos.y,
             },
             {
-                x: Number(bombPos.x) - 1,
-                y: Number(bombPos.y) + 1,
+                x: bombPos.x - 1,
+                y: bombPos.y + 1,
             },
             {
-                x: Number(bombPos.x),
-                y: Number(bombPos.y) + 1,
+                x: bombPos.x,
+                y: bombPos.y + 1,
             },
             {
-                x: Number(bombPos.x) + 1,
-                y: Number(bombPos.y) + 1,
+                x: bombPos.x + 1,
+                y: bombPos.y + 1,
             },
         ];
 
@@ -124,7 +124,68 @@ const handleTileClick = (e) => {
     } else if (bombCords.includes(tilePosStr)) {
         console.log("bomb clicked ;c"); //game over ofc
     } else {
-        console.log("empty"); //reaveal other empty
+        const checkedTiles = [];
+        const tilesToCheck = [tilePosStr];
+        while (tilesToCheck.length > 0) {
+            const centerCord = {
+                x: Number(tilesToCheck[0].split(" ")[0]),
+                y: Number(tilesToCheck[0].split(" ")[1]),
+            };
+            const centerCordStr = `${centerCord.x} ${centerCord.y}`;
+
+            const tilesChecked = [
+                {
+                    x: centerCord.x - 1,
+                    y: centerCord.y - 1,
+                },
+                {
+                    x: centerCord.x,
+                    y: centerCord.y - 1,
+                },
+                {
+                    x: centerCord.x + 1,
+                    y: centerCord.y - 1,
+                },
+                {
+                    x: centerCord.x - 1,
+                    y: centerCord.y,
+                },
+                {
+                    x: centerCord.x + 1,
+                    y: centerCord.y,
+                },
+                {
+                    x: centerCord.x - 1,
+                    y: centerCord.y + 1,
+                },
+                {
+                    x: centerCord.x,
+                    y: centerCord.y + 1,
+                },
+                {
+                    x: centerCord.x + 1,
+                    y: centerCord.y + 1,
+                },
+            ];
+            for (const checkedTile of tilesChecked) {
+                const checkedTileStr = `${checkedTile.x} ${checkedTile.y}`;
+                if (emptyCords.includes(checkedTileStr) && !checkedTiles.includes(checkedTileStr)) {
+                    tilesToCheck.push(checkedTileStr);
+                }
+            }
+            checkedTiles.push(centerCordStr);
+            tilesToCheck.shift();
+            console.log(tilesToCheck);
+        }
+        for (const tile of checkedTiles) {
+            console.log(tile);
+            const tileCord = {
+                x: Number(tile.split(" ")[0]),
+                y: Number(tile.split(" ")[1]),
+            };
+            const tileElement = getTile(tileCord.x, tileCord.y);
+            tileElement.classList.add("green");
+        }
     }
 };
 generateBoard(9, 9, 10);
