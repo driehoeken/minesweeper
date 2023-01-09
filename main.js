@@ -135,15 +135,7 @@ const handleTileClick = (e) => {
 
             const tilesChecked = [
                 {
-                    x: centerCord.x - 1,
-                    y: centerCord.y - 1,
-                },
-                {
                     x: centerCord.x,
-                    y: centerCord.y - 1,
-                },
-                {
-                    x: centerCord.x + 1,
                     y: centerCord.y - 1,
                 },
                 {
@@ -155,15 +147,7 @@ const handleTileClick = (e) => {
                     y: centerCord.y,
                 },
                 {
-                    x: centerCord.x - 1,
-                    y: centerCord.y + 1,
-                },
-                {
                     x: centerCord.x,
-                    y: centerCord.y + 1,
-                },
-                {
-                    x: centerCord.x + 1,
                     y: centerCord.y + 1,
                 },
             ];
