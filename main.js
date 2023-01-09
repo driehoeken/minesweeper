@@ -1,4 +1,4 @@
-import { getRandomInt, getTile } from "./misc.js";
+import { cordsToStr, getRandomInt, getTile, strToCords } from "./misc.js";
 const board = document.querySelector("#board");
 //we can add new variable tileNumbersArray just to check if tile is number
 //we also have to add emptyCords for better check of empty to reveal other empty lol
@@ -38,10 +38,7 @@ const generateBoard = (height, width, bombsNum) => {
 
     //setting bomb and tileNumbers
     bombCords.forEach((bomb) => {
-        const bombPos = {
-            x: Number(bomb.split(" ")[0]),
-            y: Number(bomb.split(" ")[1]),
-        };
+        const bombPos = strToCords(bomb);
         const tile = getTile(bombPos.x, bombPos.y);
         tile.classList.add("bomb");
 
@@ -104,10 +101,7 @@ const generateBoard = (height, width, bombsNum) => {
     }
     //rendering tileNumbers for debug or sth
     for (const cords in tileNumbers) {
-        const tilePos = {
-            x: cords.split(" ")[0],
-            y: cords.split(" ")[1],
-        };
+        const tilePos = strToCords(cords);
         const tile = getTile(tilePos.x, tilePos.y);
         tile.classList.add(`t${tileNumbers[cords]}`);
     }
@@ -127,11 +121,8 @@ const handleTileClick = (e) => {
         const checkedTiles = [];
         const tilesToCheck = [tilePosStr];
         while (tilesToCheck.length > 0) {
-            const centerCord = {
-                x: Number(tilesToCheck[0].split(" ")[0]),
-                y: Number(tilesToCheck[0].split(" ")[1]),
-            };
-            const centerCordStr = `${centerCord.x} ${centerCord.y}`;
+            const centerCord = strToCords(tilesToCheck[0]);
+            const centerCordStr = cordsToStr(centerCord);
 
             const tilesChecked = [
                 {
@@ -152,7 +143,7 @@ const handleTileClick = (e) => {
                 },
             ];
             for (const checkedTile of tilesChecked) {
-                const checkedTileStr = `${checkedTile.x} ${checkedTile.y}`;
+                const checkedTileStr = cordsToStr(checkedTile);
                 if (emptyCords.includes(checkedTileStr) && !checkedTiles.includes(checkedTileStr)) {
                     tilesToCheck.push(checkedTileStr);
                 }
@@ -163,10 +154,7 @@ const handleTileClick = (e) => {
         }
         for (const tile of checkedTiles) {
             console.log(tile);
-            const tileCord = {
-                x: Number(tile.split(" ")[0]),
-                y: Number(tile.split(" ")[1]),
-            };
+            const tileCord = strToCords(tile);
             const tileElement = getTile(tileCord.x, tileCord.y);
             tileElement.classList.add("green");
         }
