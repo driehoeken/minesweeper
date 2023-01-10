@@ -118,13 +118,13 @@ const handleTileClick = (e) => {
     } else if (bombCords.includes(tilePosStr)) {
         console.log("bomb clicked ;c"); //game over ofc
     } else {
-        const checkedTiles = [];
+        const revealedTiles = [];
         const tilesToCheck = [tilePosStr];
         while (tilesToCheck.length > 0) {
             const centerCord = strToCords(tilesToCheck[0]);
             const centerCordStr = cordsToStr(centerCord);
 
-            const tilesChecked = [
+            const emptyTilesChecked = [
                 {
                     x: centerCord.x,
                     y: centerCord.y - 1,
@@ -142,17 +142,63 @@ const handleTileClick = (e) => {
                     y: centerCord.y + 1,
                 },
             ];
-            for (const checkedTile of tilesChecked) {
+            const numberTilesChecked = [
+                {
+                    x: centerCord.x,
+                    y: centerCord.y - 1,
+                },
+                {
+                    x: centerCord.x - 1,
+                    y: centerCord.y - 1,
+                },
+                {
+                    x: centerCord.x + 1,
+                    y: centerCord.y - 1,
+                },
+                {
+                    x: centerCord.x + 1,
+                    y: centerCord.y + 1,
+                },
+                {
+                    x: centerCord.x - 1,
+                    y: centerCord.y + 1,
+                },
+                {
+                    x: centerCord.x - 1,
+                    y: centerCord.y,
+                },
+                {
+                    x: centerCord.x + 1,
+                    y: centerCord.y,
+                },
+                {
+                    x: centerCord.x,
+                    y: centerCord.y + 1,
+                },
+            ];
+            for (const checkedTile of emptyTilesChecked) {
                 const checkedTileStr = cordsToStr(checkedTile);
-                if (emptyCords.includes(checkedTileStr) && !checkedTiles.includes(checkedTileStr)) {
+                if (
+                    emptyCords.includes(checkedTileStr) &&
+                    !revealedTiles.includes(checkedTileStr)
+                ) {
                     tilesToCheck.push(checkedTileStr);
                 }
             }
-            checkedTiles.push(centerCordStr);
+            for (const checkedTile of numberTilesChecked) {
+                const checkedTileStr = cordsToStr(checkedTile);
+                if (
+                    tileNumbersArray.includes(checkedTileStr) &&
+                    !revealedTiles.includes(checkedTileStr)
+                ) {
+                    revealedTiles.push(checkedTileStr);
+                }
+            }
+            revealedTiles.push(centerCordStr);
             tilesToCheck.shift();
             console.log(tilesToCheck);
         }
-        for (const tile of checkedTiles) {
+        for (const tile of revealedTiles) {
             console.log(tile);
             const tileCord = strToCords(tile);
             const tileElement = getTile(tileCord.x, tileCord.y);
