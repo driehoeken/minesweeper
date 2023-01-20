@@ -22,7 +22,7 @@ const renderTiles = (height, width) => {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const tile = document.createElement("div");
-            tile.classList.add("tile");
+            tile.classList.add("tile-hidden");
             tile.setAttribute("data-x", j);
             tile.setAttribute("data-y", i);
             tile.addEventListener("click", (e) => {
@@ -199,10 +199,12 @@ const handleTileClick = (e) => {
             console.log(tilesToCheck);
         }
         for (const tile of revealedTiles) {
-            console.log(tile);
             const tileCord = strToCords(tile);
             const tileElement = getTile(tileCord.x, tileCord.y);
-            tileElement.classList.add("green");
+            if (emptyCords.includes(tile)) {
+                getTile(tileCord.x, tileCord.y).classList.remove("tile-hidden");
+                getTile(tileCord.x, tileCord.y).classList.add("tile-empty");
+            }
         }
     }
 };
