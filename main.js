@@ -39,7 +39,7 @@ const generateBoard = (height, width, bombsNum) => {
     //setting bomb and tileNumbers
     bombCords.forEach((bomb) => {
         const bombPos = strToCords(bomb);
-        const tile = getTile(bombPos.x, bombPos.y);
+        const tile = getTile(bomb);
         tile.classList.add("bomb");
 
         const tilesToCheck = [
@@ -78,7 +78,8 @@ const generateBoard = (height, width, bombsNum) => {
         ];
 
         for (const tile of tilesToCheck) {
-            const checkedTile = getTile(tile.x, tile.y);
+            const tileCords = cordsToStr(tile);
+            const checkedTile = getTile(tileCords);
             if (checkedTile !== null && !bombCords.includes(`${tile.x} ${tile.y}`)) {
                 if (tileNumbers[`${tile.x} ${tile.y}`] === undefined) {
                     tileNumbers[`${tile.x} ${tile.y}`] = 1;
@@ -100,10 +101,9 @@ const generateBoard = (height, width, bombsNum) => {
         console.log("e");
     }
     //rendering tileNumbers for debug or sth
-    for (const cords in tileNumbers) {
-        const tilePos = strToCords(cords);
-        const tile = getTile(tilePos.x, tilePos.y);
-        tile.classList.add(`t${tileNumbers[cords]}`);
+    for (const tileCords in tileNumbers) {
+        const tile = getTile(tileCords);
+        tile.classList.add(`t${tileNumbers[tileCords]}`);
     }
 };
 const handleTileClick = (e) => {
@@ -198,12 +198,10 @@ const handleTileClick = (e) => {
             tilesToCheck.shift();
             console.log(tilesToCheck);
         }
-        for (const tile of revealedTiles) {
-            const tileCord = strToCords(tile);
-            const tileElement = getTile(tileCord.x, tileCord.y);
-            if (emptyCords.includes(tile)) {
-                getTile(tileCord.x, tileCord.y).classList.remove("tile-hidden");
-                getTile(tileCord.x, tileCord.y).classList.add("tile-empty");
+        for (const tileCords of revealedTiles) {
+            if (emptyCords.includes(tileCords)) {
+                getTile(tileCords).classList.remove("tile-hidden");
+                getTile(tileCords).classList.add("tile-empty");
             }
         }
     }

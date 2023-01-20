@@ -1,7 +1,8 @@
 export const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
 };
-export const getTile = (x, y) => {
+export const getTile = (cords) => {
+    const [x, y] = cords.split(" ");
     return document.querySelector(`[data-x="${x}"][data-y="${y}"]`);
 };
 export const cordsToStr = (obj) => {
