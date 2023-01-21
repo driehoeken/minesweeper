@@ -21,6 +21,11 @@ body {
 }
 .tile {
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-family: "Comic Neue";
 }
 .tile.hidden {
     background-color: #f7f7f7;
@@ -33,52 +38,52 @@ body {
     box-shadow: 0px 5px 0px 2px #525252;
 }
 .tile.t1 {
-    content: "1";
-    background-color: #fd8a8a;
-    -webkit-box-shadow: 0px 5px 0px 2px #9b4e4e;
-    box-shadow: 0px 5px 0px 2px #9b4e4e;
+    background-color: #fd7979;
+    -webkit-box-shadow: 0px 5px 0px 2px #b66161;
+    box-shadow: 0px 5px 0px 2px #b66161;
+    color: #ff9f9f;
 }
 .tile.t2 {
-    content: "2";
-    background-color: #f1f7b5;
-    -webkit-box-shadow: 0px 5px 0px 2px #b8be7c;
-    box-shadow: 0px 5px 0px 2px #b8be7c;
+    background-color: #ffe064;
+    -webkit-box-shadow: 0px 5px 0px 2px #c9af46;
+    box-shadow: 0px 5px 0px 2px #c9af46;
+    color: #f9fcd6;
 }
 .tile.t3 {
-    content: "3";
-    background-color: #38f4f4;
+    background-color: #4de8e8;
     -webkit-box-shadow: 0px 5px 0px 2px #2b9c9c;
     box-shadow: 0px 5px 0px 2px #2b9c9c;
+    color: #a1fcfc;
 }
 .tile.t4 {
-    content: "4";
     background-color: #9ea1d4;
     -webkit-box-shadow: 0px 5px 0px 2px #676aac;
     box-shadow: 0px 5px 0px 2px #676aac;
+    color: #c1c2e2;
 }
 .tile.t5 {
-    content: "5";
-    background-color: #a0ff8b;
+    background-color: #91fd78;
     -webkit-box-shadow: 0px 5px 0px 2px #71c75d;
     box-shadow: 0px 5px 0px 2px #71c75d;
+    color: #d4ffcb;
 }
 .tile.t6 {
-    content: "6";
     background-color: #ff934b;
     -webkit-box-shadow: 0px 5px 0px 2px #ce773c;
     box-shadow: 0px 5px 0px 2px #ce773c;
+    color: #fcbc91;
 }
 .tile.t7 {
-    content: "7";
     background-color: #ba94d1;
     -webkit-box-shadow: 0px 5px 0px 2px #9069a9;
     box-shadow: 0px 5px 0px 2px #9069a9;
+    color: #cdbad9;
 }
 .tile.t8 {
-    content: "8";
     background-color: #6b728e;
     -webkit-box-shadow: 0px 5px 0px 2px #434963;
     box-shadow: 0px 5px 0px 2px #434963;
+    color: #999ba3;
 }
 /**/
 .tile.t1::before {
