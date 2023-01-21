@@ -117,7 +117,7 @@ const handleTileClick = (e) => {
     };
     const tilePosStr = `${tilePos.x} ${tilePos.y}`;
     if (tileNumbersArray.includes(tilePosStr)) {
-        console.log("number clicked"); //reveal only one
+        clickedTile.classList.add(`t${tileNumbers[tilePosStr]}`);
     } else if (bombCords.includes(tilePosStr)) {
         console.log("bomb clicked ;c"); //game over ofc
     } else {
