@@ -22,7 +22,8 @@ const renderTiles = (height, width) => {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             const tile = document.createElement("div");
-            tile.classList.add("tile-hidden");
+            tile.classList.add("tile");
+            tile.classList.add("hidden");
             tile.setAttribute("data-x", j);
             tile.setAttribute("data-y", i);
             tile.addEventListener("click", (e) => {
@@ -101,10 +102,12 @@ const generateBoard = (height, width, bombsNum) => {
         console.log("e");
     }
     //rendering tileNumbers for debug or sth
+    /*
     for (const tileCords in tileNumbers) {
         const tile = getTile(tileCords);
         tile.classList.add(`t${tileNumbers[tileCords]}`);
     }
+    */
 };
 const handleTileClick = (e) => {
     const clickedTile = e.target;
@@ -199,9 +202,12 @@ const handleTileClick = (e) => {
             console.log(tilesToCheck);
         }
         for (const tileCords of revealedTiles) {
+            const tile = getTile(tileCords);
+            tile.classList.remove("hidden");
             if (emptyCords.includes(tileCords)) {
-                getTile(tileCords).classList.remove("tile-hidden");
-                getTile(tileCords).classList.add("tile-empty");
+                tile.classList.add("empty");
+            } else {
+                tile.classList.add(`t${tileNumbers[tileCords]}`);
             }
         }
     }

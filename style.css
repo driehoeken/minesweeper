@@ -8,7 +8,7 @@ body {
     padding: 0;
 }
 #app {
-    background-color: turquoise;
+    background-color: #a8d1d1;
 }
 #game-nav {
 }
@@ -19,41 +19,66 @@ body {
     gap: 10px;
     padding: 10px;
 }
-.tile-hidden {
-    background-color: rgb(247, 247, 247);
+.tile {
     border-radius: 5px;
+}
+.tile.hidden {
+    background-color: #f7f7f7;
     -webkit-box-shadow: 0px 5px 0px 2px #d9d9d9;
     box-shadow: 0px 5px 0px 2px #d9d9d9;
 }
-.tile-empty {
-    background-color: rgb(111, 111, 111);
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 5px 0px 2px #d9d9d9;
-    box-shadow: 0px 5px 0px 2px #d9d9d9;
+.tile.empty {
+    background-color: #6f6f6f;
+    -webkit-box-shadow: 0px 5px 0px 2px #525252;
+    box-shadow: 0px 5px 0px 2px #525252;
 }
 .tile.t1 {
     content: "1";
+    background-color: #fd8a8a;
+    -webkit-box-shadow: 0px 5px 0px 2px #9b4e4e;
+    box-shadow: 0px 5px 0px 2px #9b4e4e;
 }
 .tile.t2 {
     content: "2";
+    background-color: #f1f7b5;
+    -webkit-box-shadow: 0px 5px 0px 2px #b8be7c;
+    box-shadow: 0px 5px 0px 2px #b8be7c;
 }
 .tile.t3 {
     content: "3";
+    background-color: #38f4f4;
+    -webkit-box-shadow: 0px 5px 0px 2px #2b9c9c;
+    box-shadow: 0px 5px 0px 2px #2b9c9c;
 }
 .tile.t4 {
     content: "4";
+    background-color: #9ea1d4;
+    -webkit-box-shadow: 0px 5px 0px 2px #676aac;
+    box-shadow: 0px 5px 0px 2px #676aac;
 }
 .tile.t5 {
     content: "5";
+    background-color: #a0ff8b;
+    -webkit-box-shadow: 0px 5px 0px 2px #71c75d;
+    box-shadow: 0px 5px 0px 2px #71c75d;
 }
 .tile.t6 {
     content: "6";
+    background-color: #ff934b;
+    -webkit-box-shadow: 0px 5px 0px 2px #ce773c;
+    box-shadow: 0px 5px 0px 2px #ce773c;
 }
 .tile.t7 {
     content: "7";
+    background-color: #ba94d1;
+    -webkit-box-shadow: 0px 5px 0px 2px #9069a9;
+    box-shadow: 0px 5px 0px 2px #9069a9;
 }
 .tile.t8 {
     content: "8";
+    background-color: #6b728e;
+    -webkit-box-shadow: 0px 5px 0px 2px #434963;
+    box-shadow: 0px 5px 0px 2px #434963;
 }
 /**/
 .tile.t1::before {
