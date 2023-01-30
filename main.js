@@ -113,6 +113,9 @@ const generateBoard = (height, width, bombsNum) => {
 };
 const handleTileClick = (e) => {
     const clickedTile = e.target;
+    if (clickedTile.classList.contains("flag")) {
+        return;
+    }
     const tilePos = {
         x: clickedTile.getAttribute("data-x"),
         y: clickedTile.getAttribute("data-y"),
@@ -216,6 +219,7 @@ const handleTileClick = (e) => {
 };
 const handleTileRightClick = (e) => {
     e.preventDefault();
-    console.log("rightClick");
+    const clickedTile = e.target;
+    clickedTile.classList.toggle("flag");
 };
 generateBoard(9, 9, 10);
