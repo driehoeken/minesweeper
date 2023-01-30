@@ -1,11 +1,10 @@
 import { cordsToStr, getRandomInt, getTile, strToCords } from "./misc.js";
 const board = document.querySelector("#board");
-//we can add new variable tileNumbersArray just to check if tile is number
-//we also have to add emptyCords for better check of empty to reveal other empty lol
 let bombCords = [];
 let tileNumbers = {};
 let tileNumbersArray = [];
 let emptyCords = [];
+//randomizing cords for bombs
 const generateBombsCords = (height, width, bombsNum) => {
     const bombsCords = [];
     let leftBombs = bombsNum;
@@ -18,6 +17,7 @@ const generateBombsCords = (height, width, bombsNum) => {
     }
     return bombsCords;
 };
+//rendering tiles, adding them attributes and event listeners
 const renderTiles = (height, width) => {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
@@ -36,15 +36,14 @@ const renderTiles = (height, width) => {
         }
     }
 };
-const generateBoard = (height, width, bombsNum) => {
+//setting emptyArray, bombCords, tileNumbers and tileNumbersArray
+const settingVars = (height, width, bombsNum) => {
     bombCords = generateBombsCords(height, width, bombsNum);
     renderTiles(height, width);
 
-    //setting bomb and tileNumbers
+    //setting tileNumbers
     bombCords.forEach((bomb) => {
         const bombPos = strToCords(bomb);
-        const tile = getTile(bomb);
-        //tile.classList.add("bomb");
 
         const tilesToCheck = [
             {
@@ -81,6 +80,7 @@ const generateBoard = (height, width, bombsNum) => {
             },
         ];
 
+        //checking 8 tiles around bomb and adding all of them +1 value
         for (const tile of tilesToCheck) {
             const tileCords = cordsToStr(tile);
             const checkedTile = getTile(tileCords);
@@ -93,7 +93,9 @@ const generateBoard = (height, width, bombsNum) => {
             }
         }
     });
+    //setting tileNumbersArray
     tileNumbersArray = Object.getOwnPropertyNames(tileNumbers);
+    //setting emptyCords
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let cordStr = `${j} ${i}`;
@@ -101,18 +103,11 @@ const generateBoard = (height, width, bombsNum) => {
                 emptyCords.push(cordStr);
             }
         }
-        console.log("e");
     }
-    //rendering tileNumbers for debug or sth
-    /*
-    for (const tileCords in tileNumbers) {
-        const tile = getTile(tileCords);
-        tile.classList.add(`t${tileNumbers[tileCords]}`);
-    }
-    */
 };
 const handleTileClick = (e) => {
     const clickedTile = e.target;
+    //return if it is flag
     if (clickedTile.classList.contains("flag")) {
         return;
     }
@@ -121,17 +116,22 @@ const handleTileClick = (e) => {
         y: clickedTile.getAttribute("data-y"),
     };
     const tilePosStr = `${tilePos.x} ${tilePos.y}`;
+    //if single number is clicked, it will reveal only clicked tile
     if (tileNumbersArray.includes(tilePosStr)) {
         clickedTile.classList.add(`t${tileNumbers[tilePosStr]}`);
-    } else if (bombCords.includes(tilePosStr)) {
+    }
+    //if bomb is clicked it is game over ;c
+    else if (bombCords.includes(tilePosStr)) {
         console.log("bomb clicked ;c"); //game over ofc
-    } else {
+    }
+    //otherwise, empty tile is clicked and it will reveal all empty tiles and tiles with number which are connected lol
+    else {
         const revealedTiles = [];
         const tilesToCheck = [tilePosStr];
         while (tilesToCheck.length > 0) {
             const centerCord = strToCords(tilesToCheck[0]);
             const centerCordStr = cordsToStr(centerCord);
-
+            //array of tiles which could be empty and we have to check them
             const emptyTilesChecked = [
                 {
                     x: centerCord.x,
@@ -150,6 +150,7 @@ const handleTileClick = (e) => {
                     y: centerCord.y + 1,
                 },
             ];
+            //array of tiles which could contain number and we have to check them
             const numberTilesChecked = [
                 {
                     x: centerCord.x,
@@ -186,6 +187,7 @@ const handleTileClick = (e) => {
             ];
             for (const checkedTile of emptyTilesChecked) {
                 const checkedTileStr = cordsToStr(checkedTile);
+                //if this tile is empty and was not revealed,  add this tile to tilesToCheck
                 if (
                     emptyCords.includes(checkedTileStr) &&
                     !revealedTiles.includes(checkedTileStr)
@@ -195,6 +197,7 @@ const handleTileClick = (e) => {
             }
             for (const checkedTile of numberTilesChecked) {
                 const checkedTileStr = cordsToStr(checkedTile);
+                //if this tile contains number and was not revealed, add this tile to revealedTiles
                 if (
                     tileNumbersArray.includes(checkedTileStr) &&
                     !revealedTiles.includes(checkedTileStr)
@@ -202,10 +205,11 @@ const handleTileClick = (e) => {
                     revealedTiles.push(checkedTileStr);
                 }
             }
+            //add tile to revealed and delete it from tiles to check
             revealedTiles.push(centerCordStr);
             tilesToCheck.shift();
-            console.log(tilesToCheck);
         }
+        //reveal tiles from revealedTiles
         for (const tileCords of revealedTiles) {
             const tile = getTile(tileCords);
             tile.classList.remove("hidden");
@@ -222,4 +226,4 @@ const handleTileRightClick = (e) => {
     const clickedTile = e.target;
     clickedTile.classList.toggle("flag");
 };
-generateBoard(9, 9, 10);
+settingVars(9, 9, 10);
