@@ -10,9 +10,9 @@ const generateBombsCords = (height, width, bombsNum) => {
     const bombsCords = [];
     let leftBombs = bombsNum;
     while (leftBombs > 0) {
-        const bombHelp = `${getRandomInt(width)} ${getRandomInt(height)}`;
-        if (!bombsCords.includes(bombHelp)) {
-            bombsCords.push(bombHelp);
+        const bombCords = `${getRandomInt(width)} ${getRandomInt(height)}`;
+        if (!bombsCords.includes(bombCords)) {
+            bombsCords.push(bombCords);
             leftBombs -= 1;
         }
     }
@@ -29,6 +29,9 @@ const renderTiles = (height, width) => {
             tile.addEventListener("click", (e) => {
                 handleTileClick(e);
             });
+            tile.addEventListener("contextmenu", (e) => {
+                handleTileRightClick(e);
+            });
             board.appendChild(tile);
         }
     }
@@ -41,7 +44,7 @@ const generateBoard = (height, width, bombsNum) => {
     bombCords.forEach((bomb) => {
         const bombPos = strToCords(bomb);
         const tile = getTile(bomb);
-        tile.classList.add("bomb");
+        //tile.classList.add("bomb");
 
         const tilesToCheck = [
             {
@@ -94,7 +97,6 @@ const generateBoard = (height, width, bombsNum) => {
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             let cordStr = `${j} ${i}`;
-            console.log(cordStr);
             if (!tileNumbersArray.includes(cordStr) && !bombCords.includes(cordStr)) {
                 emptyCords.push(cordStr);
             }
@@ -212,5 +214,8 @@ const handleTileClick = (e) => {
         }
     }
 };
+const handleTileRightClick = (e) => {
+    e.preventDefault();
+    console.log("rightClick");
+};
 generateBoard(9, 9, 10);
-console.log(emptyCords);
