@@ -18,16 +18,19 @@
     </head>
     <body>
         <div id="app">
-            <form>
-                <label for="difficulty">Choose a difficulty</label>
-                <select id="difficulty" name="difficulty">
-                    <option value="easy">Easy</option>
-                    <option value="medium">Medium</option>
-                    <option value="hard">Hard</option>
-                </select>
-            </form>
             <div id="game">
-                <div id="game-nav"></div>
+                <div id="game-nav">
+                    <form>
+                        <label for="difficulty">Choose a difficulty</label>
+                        <select id="difficulty" name="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </form>
+                    <img src="./assets/flag-icon.svg" class="flag-image" />
+                    <p class="flags-left">12</p>
+                </div>
                 <div id="board"></div>
             </div>
         </div>
