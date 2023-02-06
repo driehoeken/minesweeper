@@ -14,3 +14,13 @@ export const strToCords = (str) => {
         y: Number(str.split(" ")[1]),
     };
 };
+export const gettingFlagsLeftText = (flags) => {
+    let flagsLeftText = `${flags}`;
+    if (flags < 100) {
+        flagsLeftText = "0" + flagsLeftText;
+    }
+    if (flags < 10) {
+        flagsLeftText = "0" + flagsLeftText;
+    }
+    return flagsLeftText;
+};

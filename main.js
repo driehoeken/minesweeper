@@ -1,4 +1,4 @@
-import { cordsToStr, getRandomInt, getTile, strToCords } from "./misc.js";
+import { cordsToStr, getRandomInt, getTile, strToCords, gettingFlagsLeftText } from "./misc.js";
 const board = document.querySelector("#board");
 const flagsLeftElement = document.querySelector(".flags-left");
 let bombCords = [];
@@ -42,7 +42,7 @@ const renderTiles = (height, width) => {
 const settingVars = (height, width, bombsNum) => {
     bombCords = generateBombsCords(height, width, bombsNum);
     flagsleft = bombsNum;
-    flagsLeftElement.textContent = flagsleft;
+    flagsLeftElement.textContent = gettingFlagsLeftText(flagsleft);
     renderTiles(height, width);
 
     //setting tileNumbers
@@ -236,7 +236,7 @@ const handleTileRightClick = (e) => {
     } else {
         flagsleft -= 1;
     }
-    flagsLeftElement.textContent = flagsleft;
+    flagsLeftElement.textContent = gettingFlagsLeftText(flagsleft);
     clickedTile.classList.toggle("flag");
 };
 settingVars(9, 9, 10);

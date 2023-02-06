@@ -13,14 +13,24 @@ body {
 }
 #game-nav {
     display: flex;
+    margin-top: 10px;
 }
-#game-nav .flag-image {
+#game-nav img {
     width: 50px;
     height: 50px;
 }
-.flags-left {
+.flag-container,
+.time-container {
+    display: flex;
+}
+.flags-left,
+.time-left {
     font-size: 45px;
     margin: 0;
+}
+.time-container,
+.flag-container {
+    margin-left: 50px;
 }
 #board {
     display: grid;
